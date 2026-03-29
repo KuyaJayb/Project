@@ -101,61 +101,7 @@ function moveRight(){
 document.getElementById("forecast").scrollLeft+=120;
 }
 
-/* LIVE WEATHER MAP */
-
-function initMap(){
-
-const lat=13.699;
-const lon=123.520;
-
-const map=L.map('map').setView([lat,lon],7);
-
-L.tileLayer(
-'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-).addTo(map);
-
-/* WEATHER LAYERS */
-
-const rainLayer=L.tileLayer(
-`https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=${apiKey}`,
-{opacity:0.6}
-);
-
-const cloudLayer=L.tileLayer(
-`https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${apiKey}`,
-{opacity:0.5}
-);
-
-const windLayer=L.tileLayer(
-`https://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=${apiKey}`,
-{opacity:0.6}
-);
-
-const tempLayer=L.tileLayer(
-`https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=${apiKey}`,
-{opacity:0.5}
-);
-
-rainLayer.addTo(map);
-
-const overlayMaps={
-"🌧 Rain Radar":rainLayer,
-"☁ Clouds":cloudLayer,
-"🌡 Temperature":tempLayer,
-"💨 Wind":windLayer
-};
-
-L.control.layers(null,overlayMaps).addTo(map);
-
-L.marker([lat,lon])
-.addTo(map)
-.bindPopup("San Jose, Camarines Sur")
-.openPopup();
-
-}
-
 /* START */
 
 getWeather();
 getForecast();
-initMap();
